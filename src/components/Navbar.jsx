@@ -11,6 +11,8 @@ function Navbar() {
     e.preventDefault();
     if(!query.trim()) return;
 
+    navigate(`/search/${query}`);
+    setQuery("");
   }
 
   return (

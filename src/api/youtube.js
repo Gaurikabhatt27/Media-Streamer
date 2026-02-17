@@ -11,3 +11,13 @@ export async function getTrendingVideos() {
 
   return data.items || [];
 }
+
+export const searchVideos = async (query) => {
+  const res = await fetch(
+    `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=20&q=${query}&key=${API_KEY}`
+  );
+
+  const data = await res.json();
+
+  return data.items;
+};

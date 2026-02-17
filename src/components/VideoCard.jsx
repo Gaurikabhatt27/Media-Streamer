@@ -1,7 +1,7 @@
 import styles from "./VideoCard.module.css";
 
 function VideoCard({ video }) {
-
+  const videoId = video.id.videoId || video.id;
   const { title, channelTitle, thumbnails } = video.snippet;
 
   return (
