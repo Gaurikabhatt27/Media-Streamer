@@ -1,0 +1,22 @@
+.card{
+  width: 100%;
+  cursor: pointer;
+}
+
+.thumbnail{
+  width: 100%;
+  border-radius: 12px;
+}
+
+.title{
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.channel{
+  font-size: 13px;
+  color: #94a3b8;
+  margin-top: 4px;
+}

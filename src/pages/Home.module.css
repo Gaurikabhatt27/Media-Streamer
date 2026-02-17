@@ -1,0 +1,23 @@
+.container{
+  padding: 10px 5px;
+}
+
+.title{
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: white;
+}
+
+/* MAIN GRID */
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+/* Make links not affect layout */
+.cardLink{
+  text-decoration: none;
+  color: white;
+}

@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import { getTrendingVideos } from "../api/youtube.js";
+import VideoCard from "../components/VideoCard";
+import { Link } from "react-router-dom";
+import ShimmerCard from "../components/ShimmerCard";
+import styles from "./Home.module.css";
+
 
 function Home() {
   const [videos, setVideos] = useState([]);
@@ -13,24 +18,33 @@ function Home() {
     fetchVideos();
   }, []);
 
-  return (
-    <div>
-      <h1>Trending Videos</h1>
-
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {videos.map((video) => (
-          <div key={video.id} style={{ width: "250px" }}>
-            <img
-              src={video.snippet.thumbnails.medium.url}
-              alt={video.snippet.title}
-              style={{ width: "100%" }}
-            />
-            <p>{video.snippet.title}</p>
-          </div>
+  if (videos.length === 0) {
+    return (
+        <div className={styles.grid}>
+        {Array(12).fill("").map((_, i) => (
+            <ShimmerCard key={i} />
         ))}
-      </div>
+        </div>
+    );
+    }
+
+    return (
+    <div className={styles.container}>
+        <h1 className={styles.title}>Trending Videos</h1>
+
+        <div className={styles.grid}>
+        {videos.map((video) => (
+            <Link
+            to={`/watch/${video.id}`}
+            key={video.id}
+            className={styles.cardLink}
+            >
+            <VideoCard video={video} />
+            </Link>
+        ))}
+        </div>
     </div>
-  );
+    );
 }
 
 export default Home;
