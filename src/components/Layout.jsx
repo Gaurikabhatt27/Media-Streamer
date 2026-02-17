@@ -1,18 +1,24 @@
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Navbar from "./Navbar.jsx";
+import Sidebar from "./Sidebar.jsx";
+import { Outlet } from "react-router-dom";
 import styles from "./Layout.module.css";
 
-function Layout({children}){
+function Layout(){
     return(
-        <div >
-            <Navbar>
-                <div>
-                    <Sidebar/>
-                    <div>
-                        {children}
-                    </div>
-                </div>
-            </Navbar>
+        <div className={styles.layout}>
+
+            <Navbar/>
+
+            <div className={styles.body}>
+                <Sidebar/>
+
+                <main className={styles.content}>
+                    <Outlet />
+                </main>
+            </div>
+
         </div>
     )
 }
+
+export default Layout;

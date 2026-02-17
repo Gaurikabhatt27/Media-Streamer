@@ -1,0 +1,29 @@
+.sidebar{
+  width:220px;
+  background:#020617;
+  padding-top:20px;
+  display:flex;
+  flex-direction:column;
+  border-right:1px solid #0f172a;
+}
+
+
+.item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:14px 22px;
+  text-decoration:none;
+  color:#cbd5e1;
+  font-size:15px;
+  transition:0.2s;
+}
+
+.item span{
+  font-size:18px;
+}
+
+.item:hover{
+  background:#1e293b;
+  color:white;
+}
