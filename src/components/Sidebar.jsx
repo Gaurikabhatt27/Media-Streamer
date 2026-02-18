@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./Sidebar.module.css";
+import WatchHistory from "../pages/WatchHistory";
 
-function Sidebar(){
+function Sidebar() {
   return (
     <aside className={styles.sidebar}>
-
       <Link to="/" className={styles.item}>
         <span>🏠</span>
         <p>Home</p>
@@ -15,16 +15,15 @@ function Sidebar(){
         <p>Trending</p>
       </Link>
 
-      <Link to="/watch/1" className={styles.item}>
-        <span>🕘</span>
-        <p>Watch</p>
-      </Link>
-
       <Link to="/profile" className={styles.item}>
         <span>👤</span>
         <p>Profile</p>
       </Link>
 
+      <Link to="/watchHistory" className={styles.item}>
+        <span>🕘</span>
+        <p>WatchHistory</p>
+      </Link>
     </aside>
   );
 }

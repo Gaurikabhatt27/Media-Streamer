@@ -7,21 +7,39 @@ function Watch() {
   const { id } = useParams();
   const [videoId, setVideoId] = useState(id);
   const [videoTitle, setVideoTitle] = useState("");
+  const [videoDetails, setVideoDetails] = useState(null);
 
+  // Fetch video details and save to state
   useEffect(() => {
+    if (!id) return;
+
     setVideoId(id);
 
-    if (id) {
-      fetchFromAPI(`videos?part=snippet&id=${id}`)
-        .then((data) => {
-          if (data?.items?.length) {
-            setVideoTitle(data.items[0].snippet.title);
-          } else {
-            setVideoTitle("Video not found");
-          }
-        })
-        .catch(() => setVideoTitle("Error fetching title"));
-    }
+    fetchFromAPI(`videos?part=snippet&id=${id}`)
+      .then((data) => {
+        if (data?.items?.length) {
+          const details = data.items[0];
+          setVideoDetails(details);
+          setVideoTitle(details.snippet.title);
+
+          // Save to watch history in localStorage
+          const stored = JSON.parse(localStorage.getItem("watchHistory")) || [];
+          const updated = [
+            {
+              id: details.id,
+              title: details.snippet.title,
+              thumbnail: details.snippet.thumbnails.high.url,
+              channel: details.snippet.channelTitle,
+            },
+            ...stored.filter((item) => item.id !== details.id),
+          ].slice(0, 20);
+
+          localStorage.setItem("watchHistory", JSON.stringify(updated));
+        } else {
+          setVideoTitle("Video not found");
+        }
+      })
+      .catch(() => setVideoTitle("Error fetching title"));
   }, [id]);
 
   if (!videoId)

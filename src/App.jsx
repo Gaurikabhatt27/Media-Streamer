@@ -7,6 +7,7 @@ import Upload from "./pages/Upload";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import Trending from "./pages/Trending.jsx";
+import WatchHistory from './pages/WatchHistory.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="profile" element={<Profile/>}/>
         <Route path="search/:query" element={<Search/>}/>
         <Route path="trending" element={<Trending/>}/>
+        <Route path="/watchHistory" element={<WatchHistory/>}/>
 
       </Route>
 
