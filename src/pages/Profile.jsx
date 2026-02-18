@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import VideoCard from "../components/VideoCard";
-import styles from "./Profile.module.css"; // create this CSS module
+import styles from "./Profile.module.css"; 
 
 function Profile() {
-  // User info (frontend-only)
   const [user, setUser] = useState({
     name: "Gaurika Bhatt",
     email: "gaurika@example.com",
     avatar: "https://ui-avatars.com/api/?name=Gaurika+Bhatt&background=random",
   });
 
-  // Load watch history from localStorage
   const [watchHistory, setWatchHistory] = useState([]);
 
   useEffect(() => {
@@ -18,16 +16,14 @@ function Profile() {
     setWatchHistory(storedHistory);
   }, []);
 
-  // Dummy stats based on localStorage
   const stats = {
     videosWatched: watchHistory.length,
-    likedVideos: 0, // can add liked videos later
+    likedVideos: 0, 
   };
 
   return (
     <div className={styles.container}>
       
-      {/* PROFILE HEADER */}
       <div className={styles.header}>
         <img src={user.avatar} alt={user.name} className={styles.avatar} />
         <div className={styles.userInfo}>
@@ -36,7 +32,6 @@ function Profile() {
         </div>
       </div>
 
-      {/* PROFILE STATS */}
       <div className={styles.stats}>
         <div className={styles.stat}>
           <h3>{stats.videosWatched}</h3>
@@ -48,7 +43,6 @@ function Profile() {
         </div>
       </div>
 
-      {/* WATCH HISTORY */}
       <h2 className={styles.sectionTitle}>Watch History</h2>
       {watchHistory.length === 0 ? (
         <p style={{ color: "white" }}>No watch history yet.</p>
