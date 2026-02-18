@@ -3,10 +3,11 @@ import styles from "./VideoCard.module.css";
 
 function VideoCard({ video }) {
   const videoId = video.id.videoId || video.id;
+  if (!video?.snippet) return null;
   const { title, channelTitle, thumbnails } = video.snippet;
 
   return (
-    <Link to={`/watch/${videoId}`} className={styles.link}>
+    <Link to={`/watch/${videoId}`}>
       <div className={styles.card}>
         <img src={thumbnails.medium.url} alt={title} className={styles.thumbnail} />
         <p className={styles.title}>{title}</p>

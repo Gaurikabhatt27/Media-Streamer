@@ -6,7 +6,7 @@ function Recommendations({ videoId }) {
   const [recommended, setRecommended] = useState([]);
   const [loading, setLoading] = useState(false);
 
- useEffect(() => {
+  useEffect(() => {
   console.log("Fetching recommendations for videoId:", videoId);
   if (!videoId) return;
 
@@ -14,17 +14,19 @@ function Recommendations({ videoId }) {
   getRelatedVideos(videoId)
     .then((items) => {
       console.log("API returned items:", items); 
-      setRecommended(items);
+      setRecommended(items || []);
     })
     .finally(() => setLoading(false));
 }, [videoId]);
 
 
   if (loading) return <p style={{ color: "white" }}>Loading recommendations...</p>;
-  if (!recommended.length) return <p style={{ color: "white" }}>No recommendations available.</p>;
+  if (!loading && recommended.length === 0) 
+    return <p style={{ color: "white" }}>No recommendations available.</p>;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <h3 style={{ color: "white", marginBottom: "10px" }}>Recommended</h3>
       {recommended.map((video) => (
         <VideoCard key={video.id.videoId || video.id} video={video} />
       ))}

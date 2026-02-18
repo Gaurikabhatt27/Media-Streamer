@@ -30,6 +30,42 @@ export async function getTrendingVideos(maxResults = 12, regionCode = "IN") {
   }
 }
 
+export async function getRelatedVideos(videoId) {
+  if (!videoId) return [];
+
+  try {
+    const videoRes = await fetch(
+      `${BASE_URL}videos?part=snippet&id=${videoId}&key=${API_KEY}`
+    );
+    const videoData = await videoRes.json();
+
+    if (!videoData.items || !videoData.items.length) return [];
+
+    const title = videoData.items[0].snippet.title;
+
+    const query = title.split(" ").slice(0, 3).join(" ");
+
+    const searchRes = await fetch(
+      `${BASE_URL}search?part=snippet&type=video&maxResults=12&q=${encodeURIComponent(
+        query
+      )}&regionCode=IN&key=${API_KEY}`
+    );
+
+    const searchData = await searchRes.json();
+
+    if (!searchData.items) return [];
+
+    return searchData.items.filter(
+      (item) => item.id.videoId !== videoId
+    );
+
+  } catch (err) {
+    console.error("Recommendation fetch failed:", err);
+    return [];
+  }
+}
+
+
 export const searchVideos = async (query, maxResults = 20) => {
   if (!query) return [];
   try {
@@ -57,17 +93,19 @@ export async function fetchFromAPI(endpoint) {
   }
 }
 
-export async function getRelatedVideos(videoId) {
-  if (!videoId) return [];
 
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=10&key=${API_KEY}`;
-
+async function getVideoDetails(videoId) {
   try {
-    const res = await fetch(url);
+    const res = await fetch(
+      `${BASE_URL}videos?part=snippet&id=${videoId}&key=${API_KEY}`
+    );
     const data = await res.json();
-    return data.items || [];
-  } catch (error) {
-    console.error("Error fetching related videos:", error);
-    return [];
+
+    if (!data.items || !data.items.length) return null;
+
+    return data.items[0].snippet.categoryId;
+  } catch (e) {
+    console.error("Video details error:", e);
+    return null;
   }
 }
