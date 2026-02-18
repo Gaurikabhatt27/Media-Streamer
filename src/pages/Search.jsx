@@ -40,7 +40,7 @@ function Search(){
       <div className="videoGrid">
         {videos.map((video) => (
           <VideoCard
-            key={video.id.videoId || video.id}
+            key={video.id}
             video={video}
           />
         ))}

@@ -18,20 +18,20 @@ export async function isVideoPublic(videoId) {
 }
 
 export async function getTrendingVideos(pageToken = null, regionCode = "IN") {
+  let url = `${BASE_URL}videos?part=snippet,statistics&chart=mostPopular&regionCode=${regionCode}&maxResults=12&key=${API_KEY}`;
+  if (pageToken) url += `&pageToken=${pageToken}`;
 
-  let url = `${BASE_URL}videos?part=snippet&chart=mostPopular&regionCode=${regionCode}&maxResults=12&key=${API_KEY}`;
-
-  if (pageToken) {
-    url += `&pageToken=${pageToken}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return {
+      videos: data.items || [],
+      nextPageToken: data.nextPageToken || null,
+    };
+  } catch (err) {
+    console.error("Trending fetch failed:", err);
+    return { videos: [], nextPageToken: null };
   }
-
-  const res = await fetch(url);
-  const data = await res.json();
-
-  return {
-    videos: data.items || [],
-    nextPageToken: data.nextPageToken || null,
-  };
 }
 
 export async function getRelatedVideos(videoId) {
@@ -42,49 +42,60 @@ export async function getRelatedVideos(videoId) {
       `${BASE_URL}videos?part=snippet&id=${videoId}&key=${API_KEY}`
     );
     const videoData = await videoRes.json();
-
-    if (!videoData.items || !videoData.items.length) return [];
+    if (!videoData.items?.length) return [];
 
     const title = videoData.items[0].snippet.title;
-
     const query = title.split(" ").slice(0, 3).join(" ");
 
     const searchRes = await fetch(
-      `${BASE_URL}search?part=snippet&type=video&maxResults=12&q=${encodeURIComponent(
-        query
-      )}&regionCode=IN&key=${API_KEY}`
+      `${BASE_URL}search?part=snippet&type=video&maxResults=12&q=${encodeURIComponent(query)}&regionCode=IN&key=${API_KEY}`
     );
-
     const searchData = await searchRes.json();
+    const ids = searchData.items.map(item => item.id.videoId).filter(Boolean).join(",");
+    if (!ids) return [];
 
-    if (!searchData.items) return [];
-
-    return searchData.items.filter(
-      (item) => item.id.videoId !== videoId
+    const statsRes = await fetch(
+      `${BASE_URL}videos?part=snippet,statistics&id=${ids}&key=${API_KEY}`
     );
+    const statsData = await statsRes.json();
 
+    return statsData.items.filter(v => v.id !== videoId);
   } catch (err) {
     console.error("Recommendation fetch failed:", err);
     return [];
   }
 }
 
-
-export const searchVideos = async (query, maxResults = 20) => {
+export async function searchVideos(query) {
   if (!query) return [];
+
   try {
-    const res = await fetch(
-      `${BASE_URL}search?part=snippet&type=video&maxResults=${maxResults}&q=${encodeURIComponent(
-        query
-      )}&key=${API_KEY}`
+    const searchRes = await fetch(
+      `${BASE_URL}search?part=snippet&type=video&maxResults=12&q=${encodeURIComponent(query)}&regionCode=IN&key=${API_KEY}`
     );
-    const data = await res.json();
-    return data.items || [];
+    const searchData = await searchRes.json();
+
+    if (!searchData.items || !searchData.items.length) return [];
+
+    const videoIds = searchData.items
+      .map(item => item.id?.videoId)
+      .filter(Boolean)
+      .join(",");
+
+    if (!videoIds) return [];
+
+    const videoRes = await fetch(
+      `${BASE_URL}videos?part=snippet,statistics&id=${videoIds}&key=${API_KEY}`
+    );
+    const videoData = await videoRes.json();
+
+    return videoData.items || [];
   } catch (err) {
-    console.error("Error searching videos:", err);
+    console.error("Search failed:", err);
     return [];
   }
-};
+}
+
 
 export async function fetchFromAPI(endpoint) {
   try {
@@ -97,19 +108,16 @@ export async function fetchFromAPI(endpoint) {
   }
 }
 
+export async function getVideoDetails(videoId) {
+  if (!videoId) return null;
 
-async function getVideoDetails(videoId) {
   try {
-    const res = await fetch(
-      `${BASE_URL}videos?part=snippet&id=${videoId}&key=${API_KEY}`
-    );
+    const res = await fetch(`${BASE_URL}videos?part=snippet&id=${videoId}&key=${API_KEY}`);
     const data = await res.json();
-
-    if (!data.items || !data.items.length) return null;
-
+    if (!data.items?.length) return null;
     return data.items[0].snippet.categoryId;
-  } catch (e) {
-    console.error("Video details error:", e);
+  } catch (err) {
+    console.error("Video details error:", err);
     return null;
   }
 }
