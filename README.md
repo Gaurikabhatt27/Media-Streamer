@@ -1,157 +1,63 @@
-Streamify 🎵📺
+# Streamify 🎵📺
 
-Streamify is a modern, React-based media streaming web application that allows users to explore, watch, and interact with video content seamlessly. Inspired by YouTube, Streamify integrates search, recommendations, user history, and personalized features in a clean, responsive interface.
+A **YouTube-inspired media streaming platform** built with **React**, allowing users to explore trending videos, search content, watch videos, view recommendations, and maintain their watch history. Fully frontend-based, no Node/Express required.
 
-Table of Contents
+---
 
-Overview
+## Table of Contents
 
-Features
+- [About](#about)  
+- [Features](#features)  
+- [Technologies Used](#technologies-used)  
+- [Future Improvements](#future-improvements)
+- 
+---
 
-Tech Stack
+## About
 
-Project Structure
+**Streamify** is a lightweight media streaming platform replicating the YouTube experience, including:
 
-Future Enhancements
+- Trending videos display  
+- Search with autocomplete suggestions  
+- Video watch page with embedded player  
+- Personalized recommendations  
+- Watch history tracking  
+- Infinite scrolling for content on the home page  
 
-Contributing
+It is designed to be **fully frontend**, using **React**, **React Router**, and the **YouTube Data API**, without the need for a backend server.
 
-Overview
+---
 
-Streamify is designed to deliver a rich media streaming experience entirely on the frontend using React. It consumes the YouTube Data API v3 for video content, allowing users to:
+## Features
 
-Search for videos and see real-time suggestions
+- 🎬 **Trending Videos**: Shows the most popular videos by region.  
+- 🔍 **Search Functionality**: Type keywords and get instant suggestions and search results.  
+- 📌 **Watch Page**: Play videos, view video details, and explore related recommendations.  
+- 🕒 **Watch History**: Tracks videos you’ve watched, stored locally.  
+- 💡 **Recommendations**: AI-style recommendations based on current video.  
+- ♾️ **Infinite Scroll**: Home page supports scrolling through endless videos, just like YouTube.  
+- 🌐 **Responsive Design**: Works across devices with a dark theme similar to modern media platforms.
 
-Watch videos with a clean player interface
+---
 
-Explore trending content
+## Technologies Used
 
-Track watch history and favorite videos
+- **Frontend**: React, React Router  
+- **API**: YouTube Data API v3  
+- **State Management**: React `useState`, `useEffect`  
+- **Styling**: CSS Modules, Flexbox, Grid  
+- **Other**: Local Storage for watch history & search history
 
-All features are implemented without a backend server — everything runs purely in the browser, storing minimal state locally.
+---
 
-Features
-Core Features
+## Future Improvements
 
-Home Page
+- Add user authentication to save watch history across devices
 
-Displays trending videos from YouTube
+- Implement like/dislike and playlist features
 
-Grid-based layout for easy browsing
+- Improve recommendation algorithm for better personalization
 
-Placeholder shimmer effect for loading states
+- Add comments and subscriptions like YouTube
 
-Search Functionality
-
-Real-time search suggestions
-
-Displays results in a clean grid
-
-Handles loading and empty states
-
-Watch Page
-
-Embedded video player
-
-Video metadata (title, channel, stats)
-
-Recommendations based on the currently playing video
-
-Recommendations
-
-Related videos fetched using the title of the currently playing video
-
-Error handling for unavailable content
-
-Profile Page
-
-User info placeholder (to be enhanced in future versions)
-
-Centralized layout matching website theme
-
-Upload Page
-
-Frontend interface for uploading video information
-
-Currently UI-only, ready for future backend integration
-
-Watch History
-
-Local storage keeps track of watched videos
-
-Easy access to previously watched content
-
-Infinite Scroll
-
-Home page's infinite scrolling like YouTube’s homepage
-
-New videos automatically load as the user scrolls down
-
-Tech Stack
-
-Frontend: React, React Router
-
-Styling: CSS Modules, Tailwind (optional future integration)
-
-API: YouTube Data API v3
-
-State Management: React Hooks
-
-Storage: LocalStorage for search history & watch history
-
-Project Structure
-streamify/
-├─ public/
-├─ src/
-│  ├─ api/
-│  │  └─ youtube.js          
-│  ├─ components/
-│  │  ├─ Navbar.jsx
-│  │  ├─ Sidebar.jsx
-│  │  ├─ VideoCard.jsx
-│  │  ├─ ShimmerCard.jsx
-│  │  └─ Recommendations.jsx
-│  ├─ pages/
-│  │  ├─ Home.jsx
-│  │  ├─ Watch.jsx
-│  │  ├─ Profile.jsx
-│  │  ├─ Upload.jsx
-│  │  └─ Search.jsx
-│  ├─ styles/
-│  │  └─ global.css
-│  └─ App.jsx
-├─ .env                     
-├─ package.json
-└─ README.md
-
-Future Enhancements
-
-Profile page integration with user favorites and playlists
-
-Upload page backend support using Firebase or Node.js
-
-Dark/Light mode toggle
-
-Enhanced recommendations using machine learning algorithms
-
-Responsive design improvements for mobile and tablet
-
-Contributing
-
-Contributions are welcome! Feel free to:
-
-Fix bugs and improve UI/UX
-
-Add new features like playlists or comments
-
-Optimize API calls and performance
-
-Steps:
-
-Fork the repository
-
-Create a new branch feature/your-feature
-
-Commit your changes
-
-Create a Pull Request
+- Optimize performance and lazy loading for infinite scroll
