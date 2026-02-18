@@ -17,17 +17,21 @@ export async function isVideoPublic(videoId) {
   }
 }
 
-export async function getTrendingVideos(maxResults = 12, regionCode = "IN") {
-  try {
-    const res = await fetch(
-      `${BASE_URL}videos?part=snippet&chart=mostPopular&regionCode=${regionCode}&maxResults=${maxResults}&key=${API_KEY}`
-    );
-    const data = await res.json();
-    return data.items || [];
-  } catch (err) {
-    console.error("Error fetching trending videos:", err);
-    return [];
+export async function getTrendingVideos(pageToken = null, regionCode = "IN") {
+
+  let url = `${BASE_URL}videos?part=snippet&chart=mostPopular&regionCode=${regionCode}&maxResults=12&key=${API_KEY}`;
+
+  if (pageToken) {
+    url += `&pageToken=${pageToken}`;
   }
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  return {
+    videos: data.items || [],
+    nextPageToken: data.nextPageToken || null,
+  };
 }
 
 export async function getRelatedVideos(videoId) {
