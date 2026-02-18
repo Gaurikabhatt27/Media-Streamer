@@ -1,32 +1,32 @@
-import {Route, Routes} from 'react-router-dom'
-import './App.css'
-import Layout from './components/Layout';
-import Home from "./pages/Home"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
 import Watch from "./pages/Watch";
 import Upload from "./pages/Upload";
 import Profile from "./pages/Profile";
+import Trending from "./pages/Trending";
 import Search from "./pages/Search";
-import Trending from "./pages/Trending.jsx";
-import WatchHistory from './pages/WatchHistory.jsx';
+import WatchHistory from "./pages/WatchHistory";
 
 function App() {
   return (
-    <Routes>
+    <BrowserRouter>
+      <Routes>
 
-      <Route element={<Layout/>}>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/watch/:id" element={<Watch />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/trending" element={<Trending />} />
+          <Route path="/history" element={<WatchHistory />} />
+          <Route path="/search/:query" element={<Search />} />
 
-        <Route path="/" element={<Home/>}/>
-        <Route path="watch/:id" element={<Watch/>}/>
-        <Route path="upload" element={<Upload/>}/>
-        <Route path="profile" element={<Profile/>}/>
-        <Route path="search/:query" element={<Search/>}/>
-        <Route path="trending" element={<Trending/>}/>
-        <Route path="/watchHistory" element={<WatchHistory/>}/>
+        </Route>
 
-      </Route>
-
-    </Routes>
-  )
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

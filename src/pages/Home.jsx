@@ -3,6 +3,7 @@ import { getTrendingVideos } from "../api/youtube.js";
 import VideoCard from "../components/VideoCard";
 import ShimmerCard from "../components/ShimmerCard";
 import styles from "./Home.module.css";
+import "./grid.css";
 
 function Home() {
 
@@ -28,7 +29,7 @@ function Home() {
 
     setLoadingMore(true);
 
-    const data = await getTrendingVideos(nextToken);
+    const data = await getTrendingVideos(nextToken, "US");
 
     setVideos(prev => [...prev, ...data.videos]);
     setNextToken(data.nextPageToken);
@@ -50,14 +51,12 @@ function Home() {
     <div className={styles.container}>
       <h1 className={styles.title}>Feed For You</h1>
 
-      <div className={styles.grid}>
+      <div className="videoGrid">
         {videos.map((video) => (
-          <VideoCard
-            key={video.id}
-            video={video}
-          />
+          <VideoCard key={video.id} video={video} />
         ))}
       </div>
+
 
       {nextToken && (
         <div style={{ textAlign: "center", margin: "30px" }}>

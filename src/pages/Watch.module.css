@@ -1,0 +1,38 @@
+.watchPage{
+  display:flex;
+  gap:28px;
+  width:100%;
+}
+
+.playerSection{
+  flex:3;
+  min-width:0;
+}
+
+.videoWrapper{
+  width:100%;
+  aspect-ratio:16/9;
+  background:black;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.videoWrapper iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
+.title{
+  margin-top:14px;
+  font-size:20px;
+  font-weight:600;
+}
+
+.recommendations{
+  flex:1.3;
+  max-height:calc(100vh - 90px);
+  overflow-y:auto;
+  padding-right:6px;
+}

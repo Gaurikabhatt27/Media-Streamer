@@ -1,29 +1,31 @@
+import { Home, Flame, User, History } from "lucide-react";
 import { Link } from "react-router-dom";
 import styles from "./Sidebar.module.css";
-import WatchHistory from "../pages/WatchHistory";
 
-function Sidebar() {
+function Sidebar({ open }) {
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${open ? styles.open : styles.close}`}>
+      
       <Link to="/" className={styles.item}>
-        <span>🏠</span>
-        <p>Home</p>
+        <Home />
+        {open && <span>Home</span>}
       </Link>
 
       <Link to="/trending" className={styles.item}>
-        <span>🔥</span>
-        <p>Trending</p>
+        <Flame />
+        {open && <span>Trending</span>}
       </Link>
 
       <Link to="/profile" className={styles.item}>
-        <span>👤</span>
-        <p>Profile</p>
+        <User />
+        {open && <span>Profile</span>}
       </Link>
 
-      <Link to="/watchHistory" className={styles.item}>
-        <span>🕘</span>
-        <p>WatchHistory</p>
+      <Link to="/history" className={styles.item}>
+        <History />
+        {open && <span>Watch History</span>}
       </Link>
+
     </aside>
   );
 }

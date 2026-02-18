@@ -2,16 +2,34 @@ import { Link } from "react-router-dom";
 import styles from "./VideoCard.module.css";
 
 function VideoCard({ video }) {
-  const videoId = video.id.videoId || video.id;
-  if (!video?.snippet) return null;
-  const { title, channelTitle, thumbnails } = video.snippet;
+
+  const id =
+    typeof video.id === "string"
+      ? video.id
+      : video.id?.videoId;
+
+  if (!id) return null;
+
+  const thumb =
+    video.snippet?.thumbnails?.high?.url ||
+    video.snippet?.thumbnails?.medium?.url ||
+    video.snippet?.thumbnails?.default?.url;
+
 
   return (
-    <Link to={`/watch/${videoId}`}>
-      <div className={styles.card}>
-        <img src={thumbnails.medium.url} alt={title} className={styles.thumbnail} />
-        <p className={styles.title}>{title}</p>
-        <p className={styles.channel}>{channelTitle}</p>
+    <Link to={`/watch/${id}`} className={styles.card}>
+      <div className={styles.thumbWrapper}>
+        <img src={thumb} alt="thumbnail" className={styles.thumbnail} />
+      </div>
+
+      <div className={styles.info}>
+        <div className={styles.title}>
+          {video.snippet?.title}
+        </div>
+
+        <div className={styles.channel}>
+          {video.snippet?.channelTitle}
+        </div>
       </div>
     </Link>
   );

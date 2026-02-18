@@ -1,24 +1,29 @@
-import Navbar from "./Navbar.jsx";
-import Sidebar from "./Sidebar.jsx";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import styles from "./Layout.module.css";
 
-function Layout(){
-    return(
-        <div className={styles.layout}>
+function Layout() {
+  const [open, setOpen] = useState(false);
 
-            <Navbar/>
+  const toggleSidebar = () => {
+    setOpen(prev => !prev);
+  };
 
-            <div className={styles.body}>
-                <Sidebar/>
+  return (
+    <div className={styles.layout}>
+      <Navbar toggleSidebar={toggleSidebar} />
 
-                <main className={styles.content}>
-                    <Outlet />
-                </main>
-            </div>
+      <div className={styles.container}>
+        <Sidebar open={open} />
 
-        </div>
-    )
+        <main className={`${styles.main} ${open ? styles.shift : styles.full}`}>
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
 }
 
 export default Layout;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getTrendingVideos } from "../api/youtube";
 import VideoCard from "../components/VideoCard";
 import ShimmerCard from "../components/ShimmerCard";
+import "./grid.css";
 
 function Trending() {
 
@@ -29,20 +30,17 @@ function Trending() {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1 style={{ color: "white" }}>Trending</h1>
+    <div className="content">
+      <h1 className="pageTitle">Trending</h1>
 
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-        gap: "20px"
-      }}>
+      <div className="videoGrid">
         {videos.length === 0
           ? Array(12).fill("").map((_, i) => <ShimmerCard key={i} />)
-          : videos.map(video => (
+          : videos.map((video) => (
               <VideoCard key={video.id} video={video} />
             ))}
       </div>
+
 
       {nextToken && (
         <div style={{ textAlign: "center", marginTop: "25px" }}>
@@ -51,7 +49,7 @@ function Trending() {
             style={{
               padding: "10px 20px",
               borderRadius: "8px",
-              background: "#ff0000",
+              background: "#8086e3",
               color: "white",
               border: "none",
               cursor: "pointer"

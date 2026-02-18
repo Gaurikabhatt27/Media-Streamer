@@ -1,18 +1,29 @@
 .layout{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
   background:#020617;
+  min-height:100vh;
+  color:white;
+}
+
+.main{
+  margin-top:60px;
+  margin-left:220px;
+  padding:20px;
+  min-height:calc(100vh - 60px);
+}
+
+.shift{
+  margin-left:220px;
+}
+
+.full{
+  margin-left:70px;
 }
 
 .body{
-  display:flex;
-  flex:1;
-}
-
-.content{
-  flex:1;
-  padding:20px;
-  overflow-y:auto;
-  color:white;
+    margin-left: 220px;
+    padding-top: 80px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background: #0f0f0f;
+    min-height: 100vh;
 }

@@ -9,14 +9,12 @@
   color: white;
 }
 
-/* MAIN GRID */
 .grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 22px;
 }
 
-/* Make links not affect layout */
 .cardLink{
   text-decoration: none;
   color: white;

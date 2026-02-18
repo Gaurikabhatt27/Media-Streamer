@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState, useMemo, useRef } from "react";
 import styles from "./Navbar.module.css";
+import { Menu } from "lucide-react";
 
-function Navbar() {
+
+function Navbar({ toggleSidebar }) {
   const [query, setQuery] = useState("");
   const [searchHistory, setSearchHistory] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -14,7 +16,6 @@ function Navbar() {
     e.preventDefault();
     if (!query.trim()) return;
 
-    // Save in history
     setSearchHistory(prev => {
       const updated = [query, ...prev.filter(item => item !== query)].slice(0, 10);
       localStorage.setItem("searchHistory", JSON.stringify(updated));
@@ -31,7 +32,6 @@ function Navbar() {
     setSearchHistory(stored);
   }, []);
 
-  // Hide suggestions when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -48,7 +48,7 @@ function Navbar() {
   }, []);
 
   const filteredSuggestions = useMemo(() => {
-    if (!query) return searchHistory; // show all when query is empty
+    if (!query) return searchHistory; 
     return searchHistory.filter(item =>
       item.toLowerCase().includes(query.toLowerCase())
     );
@@ -57,10 +57,15 @@ function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.left}>
+        <button className={styles.menuBtn} onClick={toggleSidebar}>
+          <Menu size={26} />
+        </button>
+
         <Link to="/" className={styles.logo}>
           Streamify
         </Link>
       </div>
+
 
       <form className={styles.center} onSubmit={handleSearch}>
         <input
