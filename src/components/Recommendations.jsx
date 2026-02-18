@@ -13,7 +13,7 @@ function Recommendations({ videoId }) {
   setLoading(true);
   getRelatedVideos(videoId)
     .then((items) => {
-      console.log("API returned items:", items); // <-- check this
+      console.log("API returned items:", items); 
       setRecommended(items);
     })
     .finally(() => setLoading(false));

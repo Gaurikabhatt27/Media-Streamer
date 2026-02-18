@@ -86,3 +86,66 @@
   object-fit:cover;
   cursor:pointer;
 }
+
+.center {
+  display: flex;
+  align-items: center;
+  position: relative; /* allows suggestions to position absolutely */
+}
+
+.searchInput {
+  width: 320px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: #1e293b;
+  color: white;
+}
+
+.searchInput::placeholder {
+  color: #94a3b8;
+}
+
+.searchBtn {
+  margin-left: 8px;
+  padding: 9px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.searchBtn:hover {
+  background: #1d4ed8;
+}
+
+/* Suggestion box */
+.suggestions {
+  position: absolute;
+  top: 100%; /* just below input */
+  left: 0;
+  background: #111;
+  color: white;
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  border: 1px solid #333;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  min-width: 320px; /* same as input */
+  z-index: 1000;
+}
+
+.suggestions li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: #222;
+}

@@ -38,16 +38,14 @@ function Search(){
       <h1>Results for: {query}</h1>
 
       <div className="videoGrid">
-        {videos.map((video)=>(
-          <Link
-            key={video.id.videoId}
-            to={`/watch/${video.id.videoId}`}
-            style={{ textDecoration:"none", color:"white"}}
-          >
-            <VideoCard video={video}/>
-          </Link>
+        {videos.map((video) => (
+          <VideoCard
+            key={video.id.videoId || video.id}
+            video={video}
+          />
         ))}
       </div>
+
     </div>
   );
 }

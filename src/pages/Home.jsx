@@ -30,21 +30,19 @@ function Home() {
 
     return (
     <div className={styles.container}>
-        <h1 className={styles.title}>Trending Videos</h1>
+      <h1 className={styles.title}>Trending Videos</h1>
 
-        <div className={styles.grid}>
+      <div className={styles.grid}>
         {videos.map((video) => (
-            <Link
-            to={`/watch/${video.id}`}
-            key={video.id}
-            className={styles.cardLink}
-            >
-            <VideoCard video={video} />
-            </Link>
+          <VideoCard
+            key={video.id.videoId || video.id}
+            video={video}
+          />
         ))}
-        </div>
+      </div>
     </div>
-    );
+  );
+
 }
 
 export default Home;
