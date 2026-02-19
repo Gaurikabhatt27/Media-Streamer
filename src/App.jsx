@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Trending from "./pages/Trending";
 import Search from "./pages/Search";
 import WatchHistory from "./pages/WatchHistory";
+import HomeScroll from "./pages/HomeScroll";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
 
         <Route element={<Layout />}>
+          <Route path="/" element={<HomeScroll />} />
           <Route path="/" element={<Home />} />
           <Route path="/watch/:id" element={<Watch />} />
           <Route path="/upload" element={<Upload />} />
