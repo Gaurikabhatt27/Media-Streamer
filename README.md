@@ -1,16 +1,63 @@
-# React + Vite
+# Streamify 🎵📺
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **YouTube-inspired media streaming platform** built with **React**, allowing users to explore trending videos, search content, watch videos, view recommendations, and maintain their watch history. Fully frontend-based, no Node/Express required.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## React Compiler
+- [About](#about)  
+- [Features](#features)  
+- [Technologies Used](#technologies-used)  
+- [Future Improvements](#future-improvements)
+- 
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## About
 
-## Expanding the ESLint configuration
+**Streamify** is a lightweight media streaming platform replicating the YouTube experience, including:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Trending videos display  
+- Search with autocomplete suggestions  
+- Video watch page with embedded player  
+- Personalized recommendations  
+- Watch history tracking  
+- Infinite scrolling for content on the home page  
+
+It is designed to be **fully frontend**, using **React**, **React Router**, and the **YouTube Data API**, without the need for a backend server.
+
+---
+
+## Features
+
+- 🎬 **Trending Videos**: Shows the most popular videos by region.  
+- 🔍 **Search Functionality**: Type keywords and get instant suggestions and search results.  
+- 📌 **Watch Page**: Play videos, view video details, and explore related recommendations.  
+- 🕒 **Watch History**: Tracks videos you’ve watched, stored locally.  
+- 💡 **Recommendations**: AI-style recommendations based on current video.  
+- ♾️ **Infinite Scroll**: Home page supports scrolling through endless videos, just like YouTube.  
+- 🌐 **Responsive Design**: Works across devices with a dark theme similar to modern media platforms.
+
+---
+
+## Technologies Used
+
+- **Frontend**: React, React Router  
+- **API**: YouTube Data API v3  
+- **State Management**: React `useState`, `useEffect`  
+- **Styling**: CSS Modules, Flexbox, Grid  
+- **Other**: Local Storage for watch history & search history
+
+---
+
+## Future Improvements
+
+- Add user authentication to save watch history across devices
+
+- Implement like/dislike and playlist features
+
+- Improve recommendation algorithm for better personalization
+
+- Add comments and subscriptions like YouTube
+
+- Optimize performance and lazy loading for infinite scroll
